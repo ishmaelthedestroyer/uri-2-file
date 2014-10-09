@@ -1,0 +1,22 @@
+{
+  "name": "uri-2-file",
+  "version": "0.0.0",
+  "description": "Converts data uris to files.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ishmaelthedestroyer/uri-2-file.git"
+  },
+  "author": "ishmaelthedestroyer <ishmaelthedestroyer@gmail.com> (http://ishmaelthedestroyer.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ishmaelthedestroyer/uri-2-file/issues"
+  },
+  "homepage": "https://github.com/ishmaelthedestroyer/uri-2-file",
+  "dependencies": {
+    "express": "^4.9.6"
+  }
+}
