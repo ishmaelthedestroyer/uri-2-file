@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Uri to File</title>
+  <style>
+    #input {
+      width: 400px;
+      height: 200px;
+      clear: both;
+      display: block;
+    }
+
+    #download {
+      margin: 10px 0;
+      clear: both;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <textarea id='input'></textarea>
+  <button id='download'>
+    Download
+  </button>
+  <script>
+    function dataURItoBlob(dataURI) {
+        // convert base64/URLEncoded data component to raw binary data held in a string
+        var byteString;
+        if (dataURI.split(',')[0].indexOf('base64') >= 0)
+            byteString = atob(dataURI.split(',')[1]);
+        else
+            byteString = unescape(dataURI.split(',')[1]);
+
+        // separate out the mime component
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+        // write the bytes of the string to a typed array
+        var ia = new Uint8Array(byteString.length);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+
+        return new Blob([ia], {type:mimeString});
+    }
+
+    function blobToUrl(blob) {
+      return window.URL.createObjectURL(blob);
+    }
+
+    function downloadBlob(blob) {
+      var a = document.createElement('a');
+      document.body.appendChild(a);
+      a.style.display = 'none';
+
+      var url = blobToUrl(blob);
+      a.href = url;
+      a.download = 'download';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }
+
+    window.onload = function() {
+      var btn = document.getElementById('download');
+      var textarea = document.getElementById('input');
+
+      btn.onclick = function() {
+        var dataUri = textarea.value;
+        var blob = dataURItoBlob(dataUri);
+        downloadBlob(blob);
+        console.log(blob.type);
+      };
+    }
+  </script>
+</body>
+</html>
